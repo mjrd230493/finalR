@@ -1,0 +1,2 @@
+# finalR
+Se trata de crear un documento en RMarkdown que contenga los elementos que se describen a continuación. El entregable tiene que ser una carpeta comprimida (en `.zip` necesariamente) que contenga lo siguiente:  1. El código fuente del documento (el fichero `.Rmd`). Este documento tiene que estar configurado para generar una salida en formato `.html`. 1. El documento compilado (como `.html`). 1. Opcionalmente, de ser necesario, una carpeta llamada `recursos` que almacene otras cosas necesarias para compilar el documento original.
