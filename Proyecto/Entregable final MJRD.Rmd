@@ -1,0 +1,39 @@
+---
+title: "Proyecto Final Business Performance Analysis"
+author: "Misael J Rios"
+date: "17/11/2019"
+output: html_document
+---
+## Proyecto final
+# Definición de una expresión regular:
+Dentro de R, es posible asignarle texto a las variables generadas por el usuario, adicionalemnte es posible manipular todas esas variables de diversas maneras con la finalidad de encontrar cirtas oraciones o palabras dentro de texto como también concatenar diferentes palabras o frases, que se podrían considerar como únicas, en un solo vector. Para el manejo de texto, entiéndase ordernarlo y/o encontra algo específico, se utilizan las expresiones regulares.
+Las expresiones regulares permiten 3 formas de realizar patrones de búsqueda más generales que una simple expresión fija.
+
+1. Alternativas: Con el uso del pipe "|" se puede buscar una palabra u otra.
+Por ejemplo: papas | patatas, haría una busqueda de texto que tenga ya sea "papas" o "patatas".
+2. Agrupamiento: Es posible agrupar patrones juntos usando los paréntesis "()". Por ejemplo, si se busca "arro(ll|y)o" lo que se devuelve son los resultados que empatan con "arrollo" y "aroyo".
+3. Cuantificadores: Además, es posible definir si se quieren encontrar patrones repetivos o no añadiendo simplemente "&ast;" (lo cual significa que ocurre cero o multiples veces) o con "+" (indicando que ocurre una o más veces). Por ejemplo, si se quisiera buscar "arrollo" o "arroyo" cero o más veces de "ll" o "y" pero no ambas, se redactaría de la siguiente manera: arro(ll&ast;|y&ast;)o
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
