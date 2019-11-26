@@ -28,3 +28,4 @@ promedios = sapply(resumen, mean(resumen$tot))
 ggplot(resumen, aes(x = Year, y = tot, col = Race)) +
   geom_point() + facet_wrap(~ Race)
 
+

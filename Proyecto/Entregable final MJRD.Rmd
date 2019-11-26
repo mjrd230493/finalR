@@ -16,6 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * [Markdown](#Markdown)
 
+* [Estudio y representación de los datos](#Estudio y representación de datos)    
+  
+  *[Estructura de los datos a analizar](#Estructura de los datos a analizar)    
+  *[Análisis estadístico](#Análisis estadístico)
+
 ## Expresiones regulares <a name="Expresiones regulares"></a>
 ### Definición de una expresión regular <a name="Definición de una expresión regular"></a>
 <details>
@@ -72,14 +77,20 @@ Lo primero que se muestra en ambas páginas desde un comienzo es la sintaxis bá
 </details>
 
 
-## Estudio y representación de datos
+## Estudio y representación de datos <a name="Estudio y representación de datos"></a>
 
 ```{r echo = FALSE, include=FALSE}
 getwd()
 library(dplyr)
+library(tibble)
 library(data.table)
 library(ggplot2)
 library(reshape2)
+library(highcharter)
+library(rvest)
+library(knitr)
+library(xml2)
+
 cancer <- fread("tabladatoscancer.csv")
 class(cancer)
 head(cancer, 5)
@@ -91,45 +102,78 @@ class(cancer2)
 resumen <- cancer2[, list(tot = sum(Count)), by = c("Year", "Sex", "States", "Race")]
 summary(resumen)
 ```
-### Estructura de los datos a analizar
+### Estructura de los datos a analizar <a name="Estructura de los datos a analizar"></a>
+<details>
+<summary>"<span style="color:red">Click para ver la estructura de datos a anaizar</span>"</summary>
 
-```{r echo = FALSE, cancer2}
+```{r echo = FALSE, comment = "", cancer2}
 summary(cancer2)
 ```
 Los datos que se van a analizar contienen información de los diferentes tipos de cancer documentados en Estados Unidos desde 1999 hasta el año 2016 segmentados por diferentes carcaterísticas demográficas como el sexo, raza, etnia, estado y el año en el que se registró el caso.
 
-### Análisis estadístico
+### Análisis estadístico <a name="Análisis estadístico"></a>
 <details>
-<summary>"<span style="color:red">Click para ver la gráfica de efectos principales</span>"</summary>
+<summary>"<span style="color:red">Click para ver la gráfica de efectos principales y su análisis</span>"</summary>
 ![Efectos principales](maineffects.png)
 
 El gráfico de efectos principales muestra visualmente que no existe una variación significativa de año en año en cuanto al promedio de casos se refiere, sin embargo en el caso de los estados y la raza, sí existe una variación que visualmente se puede interpretar como significativa.    
 
-**La gráfica que muestra la raza** demuestra que las personas de origen caucásico son más propensas a padecer algún tipo de cancer, es posible interpretar esto debido al promedio de personas blancas que padece algún tipo de cancer en comparación con los demás grupos étnicos.
+**La gráfica que muestra la raza** demuestra que las personas de origen caucásico son más propensas a padecer algún tipo de cancer, es posible interpretar esto debido al promedio de personas blancas que es de aproximadamente 7000 casos por año que padece algún tipo de cancer en comparación con los demás grupos étnicos que dan al rededor 700 casos por año.
     
 **La gráfica que muestra lor promedios de casos por estado** muestra vosualmente dos grupos, los que está por encima de la media y aquellos que se encuentran debajo de la media. Por lo que visualmente se puede concluir que si hay una diferencia significativa entre un grupo de estados y otro.
 
-```{r echo = FALSE, tabla1}
+Como se puede ver en la siguiente gráfica, se puede observar que la cantidad de casos de cancer en personas caucásicas por año es mayor al de las personas de otras razas.
+Si analizamos de manera más detallada la gráfica, los datos que se presentan son normales, dado que la población de Estados Unidos está conformada en un 62.2% por caucásicos según [Statista](https://es.statista.com/estadisticas/600570/porcentaje-de-poblacion-de-estados-unidos--2060-por-raza-y-origen-hispano/).
+
+```{r echo = FALSE, fig.width= 10, fig.height= 8, tabla1}
 ggplot(resumen, aes(x = Year, y = tot, col = Race)) +
   geom_point() + facet_wrap(~ Race)
 ```
 
-## R Markdown
+```{r echo = FALSE, include = FALSE, poblacion}
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+url.population <- "https://es.wikipedia.org/wiki/Etnograf%C3%ADa_de_Estados_Unidos"
+res <- read_html(url.population)
+res <- html_nodes(res, "table")
+length(res)
+sapply(res, class)
+sapply(res, function(x) dim(html_table(x, fill = TRUE)))
+population <- html_table(res[[1]])
+head(population)
+str(population)
+colnames(population)[3] <- "Porcentaje"
+head(population)
+population$Población <- gsub("[^0-9]", ",", population$Población)
+population$Población <- gsub("[^0-9]", "", population$Población)
+population$Población <- as.numeric(as.character(population$Población))
+colnames(population)[2] <- "Poblacion"
+str(population)
+head(population)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
+Incluso, si se revisa información solo de los pobladores hispanos que ofrece [Wikipedia](https://es.wikipedia.org/wiki/Etnograf%C3%ADa_de_Estados_Unidos), su origen sigue la misma distribución que tiene el fichero descargado.
 
-You can also embed plots, for example:
+```{r echo = FALSE, include = FALSE, pop3}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+pop3 <- population %>% 
+  group_by(Raza) %>% 
+  summarise(Poblacion = sum(Poblacion), Porcentaje = sum(Porcentaje)) %>% 
+  arrange(-Poblacion, -Porcentaje) %>% 
+  glimpse()
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r echo = FALSE, warning = FALSE, population}
+
+kable(head(population))
+
+```
+
+```{r echo = FALSE, warning = FALSE, fig.width= 15, fig.height= 10, popu}
+
+hchart(pop3, "treemap", hcaes(x = Raza, value = Porcentaje, color = Poblacion))
+
+```
+
+A final de cuentas este trabajo se realizó con la intención de conocer las funcionalidades que el software R ofrece a todos aquellos entuciastas que se quieren introducir a este mundo, por lo que el análisis aquí presentado no tiene ningún fin diferente al de ser utilizado como base para completar el proyecto asignado por el profesor [Carlos Gil Bellosta](https://github.com/cjgb).
