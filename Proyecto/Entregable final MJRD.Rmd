@@ -38,6 +38,8 @@ knitr::opts_chunk$set(echo = TRUE)
   
 * [Cierre de proyecto](#Cierre de proyecto)
 
+<div style="text-align: justify">
+
 ## Expresiones regulares <a name="Expresiones regulares"></a>
 ### Definición de una expresión regular <a name="Definición de una expresión regular"></a>
 <details>
@@ -186,4 +188,5 @@ hchart(pop3, "treemap", hcaes(x = Raza, value = Porcentaje, color = Poblacion))
 ## Cierre de proyecto <a name="Cierre de proyecto"></a>
 <details>
 <summary>"<span style="color:red">Click para ver el cirre de proyecto</span>"</summary>
-A final de cuentas este trabajo se realizó con la intención de conocer las funcionalidades que el software R ofrece a todos aquellos entusiastas que se quieren introducir a este mundo, por lo que el análisis aquí presentado no tiene ningún fin diferente al de ser utilizado como base para completar el proyecto asignado por el profesor [Carlos Gil Bellosta](https://github.com/cjgb).
+A final de cuentas este trabajo se realizó con la intención de conocer las funcionalidades que el software R ofrece a todos aquellos entusiastas que se quieren introducir a este mundo, por lo que el análisis aquí presentado no tiene ningún fin diferente al de ser utilizado como base para completar el proyecto asignado por el profesor [Carlos Gil Bellosta](https://github.com/cjgb).    
+<div/>
