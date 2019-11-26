@@ -2,8 +2,23 @@
 title: "Proyecto Final Business Performance Analysis"
 author: "Misael J Rios"
 date: "17/11/2019"
-output: html_document
+output: 
+  html_document:
+    theme: yeti
 ---
+```{r echo = FALSE, include=FALSE, warning = FALSE}
+library(dplyr)
+library(tibble)
+library(data.table)
+library(ggplot2)
+library(reshape2)
+library(highcharter)
+library(rvest)
+library(knitr)
+library(xml2)
+```
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -82,16 +97,6 @@ Lo primero que se muestra en ambas páginas desde un comienzo es la sintaxis bá
 ## Estudio y representación de datos <a name="Estudio y representación de datos"></a>
 
 ```{r echo = FALSE, include=FALSE}
-getwd()
-library(dplyr)
-library(tibble)
-library(data.table)
-library(ggplot2)
-library(reshape2)
-library(highcharter)
-library(rvest)
-library(knitr)
-library(xml2)
 
 cancer <- fread("tabladatoscancer.csv")
 class(cancer)
