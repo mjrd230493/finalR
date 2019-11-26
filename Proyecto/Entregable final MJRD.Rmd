@@ -4,6 +4,7 @@ author: "Misael J Rios"
 date: "17/11/2019"
 output: html_document
 ---
+<<<<<<< HEAD
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -26,6 +27,11 @@ knitr::opts_chunk$set(echo = TRUE)
 <details>
 <summary>"<span style="color:red">Click para ver definiciones</span>"</summary>
 De acuerdo al libro "R for Dummies", dentro de R, es posible asignarle texto a las variables generadas por el usuario, adicionalemnte es posible manipular todas esas variables de diversas maneras con la finalidad de encontrar cirtas oraciones o palabras dentro de texto como también concatenar diferentes palabras o frases, que se podrían considerar como únicas, en un solo vector. Para el manejo de texto, entiéndase ordernarlo y/o encontra algo específico, se utilizan las expresiones regulares.
+=======
+## Proyecto final
+# Definición de una expresión regular:
+Dentro de R, es posible asignarle texto a las variables generadas por el usuario, adicionalemnte es posible manipular todas esas variables de diversas maneras con la finalidad de encontrar cirtas oraciones o palabras dentro de texto como también concatenar diferentes palabras o frases, que se podrían considerar como únicas, en un solo vector. Para el manejo de texto, entiéndase ordernarlo y/o encontra algo específico, se utilizan las expresiones regulares.
+>>>>>>> 19f232323ac419e05aae3c82b410a496928a3e9f
 Las expresiones regulares permiten 3 formas de realizar patrones de búsqueda más generales que una simple expresión fija.
 
 1. Alternativas: Con el uso del pipe "|" se puede buscar una palabra u otra.
@@ -33,6 +39,7 @@ Por ejemplo: papas | patatas, haría una busqueda de texto que tenga ya sea "pap
 2. Agrupamiento: Es posible agrupar patrones juntos usando los paréntesis "()". Por ejemplo, si se busca "arro(ll|y)o" lo que se devuelve son los resultados que empatan con "arrollo" y "aroyo".
 3. Cuantificadores: Además, es posible definir si se quieren encontrar patrones repetivos o no añadiendo simplemente "&ast;" (lo cual significa que ocurre cero o multiples veces) o con "+" (indicando que ocurre una o más veces). Por ejemplo, si se quisiera buscar "arrollo" o "arroyo" cero o más veces de "ll" o "y" pero no ambas, se redactaría de la siguiente manera: arro(ll&ast;|y&ast;)o
 
+<<<<<<< HEAD
 [Adictos al trabajo](https://www.adictosaltrabajo.com/2015/01/29/regexsam/) menciona que las expresiones regulares son aquellas que permiten filtrar texto para encontrar alguna clase de coincidencia o realizar la sustitución de un caracter por otro. Definición que es muy similar a la que propone [la publicación sobre expresiones regulares en Platzi](https://platzi.com/tutoriales/1339-fundamentos-javascript/1770-expresiones-regulares-te-enseno-todo-lo-basico-con-un-solo-ejemplo/) que define a las expresiones regulares como patrones que se pueden utilizar con el objetivo de extraer, comparar, dividir o remplazar segmentos de una palabra, cadena de texto o documento.
 
 * **Evaluación de la definición: 10 de 10 para ambas páginas web ya que dan una buena idea de lo que tratan las expresiones regulares y a final de cunetas no hubo una que prefiriera por encima de la otra**
@@ -177,3 +184,28 @@ hchart(pop3, "treemap", hcaes(x = Raza, value = Porcentaje, color = Poblacion))
 ```
 
 A final de cuentas este trabajo se realizó con la intención de conocer las funcionalidades que el software R ofrece a todos aquellos entuciastas que se quieren introducir a este mundo, por lo que el análisis aquí presentado no tiene ningún fin diferente al de ser utilizado como base para completar el proyecto asignado por el profesor [Carlos Gil Bellosta](https://github.com/cjgb).
+=======
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+>>>>>>> 19f232323ac419e05aae3c82b410a496928a3e9f
